@@ -1,25 +1,25 @@
 package com.atto.nimontoy.config
 
-import com.google.common.base.Predicates
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport
+import org.springframework.web.reactive.config.WebFluxConfigurer
 import springfox.documentation.builders.ParameterBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.schema.ModelRef
+import springfox.documentation.service.BasicAuth
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
-import springfox.documentation.swagger2.annotations.EnableSwagger2
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux
 
 
 @Configuration
-@EnableSwagger2
-class SwaggerConfig : WebMvcConfigurationSupport() {
+@EnableSwagger2WebFlux
+open class SwaggerConfig: WebFluxConfigurer {
 
     @Bean
-    fun api(): Docket {
+    open fun apiDocket(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
                 .globalOperationParameters(arrayListOf(
                         ParameterBuilder()
@@ -31,17 +31,21 @@ class SwaggerConfig : WebMvcConfigurationSupport() {
                                 .modelRef(ModelRef("string")).build()
                 ))
                 .select()
-                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
+                .securitySchemes(
+                        arrayListOf(
+                                BasicAuth("basic-auth-realm")
+                        )
+                )
     }
 
-    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
-        registry.addResourceHandler("swagger-ui.html")
+    override fun addResourceHandlers(registry: org.springframework.web.reactive.config.ResourceHandlerRegistry) {
+        registry.addResourceHandler("/swagger-ui.html**")
                 .addResourceLocations("classpath:/META-INF/resources/")
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/")
     }
-
 }
