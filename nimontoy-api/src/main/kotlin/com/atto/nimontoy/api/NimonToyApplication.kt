@@ -1,4 +1,4 @@
-package com.atto.nimontoy.admin
+package com.atto.nimontoy.api
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
