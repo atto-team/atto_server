@@ -1,7 +1,7 @@
-package com.atto.nimontoy.web
+package com.atto.nimontoy.admin.web
 
-import com.atto.nimontoy.model.User
-import com.atto.nimontoy.model.UserRepository
+import com.atto.nimontoy.admin.model.User
+import com.atto.nimontoy.admin.model.UserRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse

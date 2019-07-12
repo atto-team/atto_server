@@ -1,4 +1,4 @@
-package com.atto.nimontoy
+package com.atto.nimontoy.admin
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

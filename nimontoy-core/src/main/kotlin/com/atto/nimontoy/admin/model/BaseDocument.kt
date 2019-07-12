@@ -1,4 +1,4 @@
-package com.atto.nimontoy.model
+package com.atto.nimontoy.admin.model
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
