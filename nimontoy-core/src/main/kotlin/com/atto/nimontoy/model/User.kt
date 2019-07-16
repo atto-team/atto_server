@@ -1,4 +1,4 @@
-package com.atto.nimontoy.core.model
+package com.atto.nimontoy.model
 
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository

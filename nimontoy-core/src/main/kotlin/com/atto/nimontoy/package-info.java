@@ -3,4 +3,4 @@
  * Blog : http://gyejoong.tistory.com
  * Github : http://github.com/Gyejoon
  */
-package com.atto.nimontoy.core;
+package com.atto.nimontoy;

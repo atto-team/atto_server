@@ -1,4 +1,4 @@
-package com.atto.nimontoy.api
+package com.atto.nimontoy
 
 /**
  * Created by 00700mm@gmail.com on 2019-07-13
