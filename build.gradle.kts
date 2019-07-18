@@ -84,6 +84,7 @@ project("nimontoy-api") {
         implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
         implementation("org.springframework.boot:spring-boot-starter-webflux")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
+        implementation("org.springframework.boot:spring-boot-starter-security")
 
         implementation("io.springfox:springfox-swagger2:$swaggerVersion")
         implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
