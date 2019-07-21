@@ -27,3 +27,4 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+/nimontoy-core/src/main/kotlin/com/atto/nimontoy/

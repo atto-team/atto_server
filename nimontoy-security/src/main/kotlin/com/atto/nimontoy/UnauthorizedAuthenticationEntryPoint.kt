@@ -1,4 +1,4 @@
-package com.atto.nimontoy.security
+package com.atto.nimontoy
 
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.AuthenticationException

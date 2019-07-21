@@ -1,6 +1,5 @@
-package com.atto.nimontoy.configuration
+package com.atto.nimontoy
 
-import com.atto.nimontoy.security.UnauthorizedAuthenticationEntryPoint
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
