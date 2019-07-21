@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: nimon-toy
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/nimon_toy
+
+---
+spring:
+  profiles: dev
+
+
+---
+spring:
+  profiles: docker

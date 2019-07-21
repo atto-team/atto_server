@@ -1,5 +1,3 @@
-# kotlin-springwebmvc example
-
 # Specification
 
 1. Core
