@@ -69,8 +69,9 @@ val restAssuredVersion = "3.0.2"
 
 project("nimontoy-core") {
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-webflux")
-        compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+        compile("mysql:mysql-connector-java")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("com.klaytn.caver:core:$klaytnVersion")
     }
 

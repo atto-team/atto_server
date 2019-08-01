@@ -1,11 +1,11 @@
 package com.atto.nimontoy
 
-import org.springframework.http.HttpStatus
+import com.atto.nimontoy.util.loggerOf
 import org.springframework.security.core.AuthenticationException
-import org.springframework.security.web.server.ServerAuthenticationEntryPoint
+import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.stereotype.Component
-import org.springframework.web.server.ServerWebExchange
-import reactor.core.publisher.Mono
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 /**
  * Created by 00700mm@gmail.com on 2019-07-19
@@ -13,13 +13,14 @@ import reactor.core.publisher.Mono
  * Github : http://github.com/Gyejoon
  */
 @Component
-class UnauthorizedAuthenticationEntryPoint : ServerAuthenticationEntryPoint {
+class UnauthorizedAuthenticationEntryPoint : AuthenticationEntryPoint {
 
-    override fun commence(
-            exchange: ServerWebExchange,
-            e: AuthenticationException): Mono<Void> =
-            Mono.fromRunnable {
-                exchange.response.statusCode = HttpStatus.UNAUTHORIZED
-            }
-    
+    private val log = loggerOf(this::class)
+
+    override fun commence(request: HttpServletRequest?, response: HttpServletResponse, e: AuthenticationException) {
+        log.error("Responding with unauthorized error . Message = {}", e.message)
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized error.")
+    }
+
+
 }

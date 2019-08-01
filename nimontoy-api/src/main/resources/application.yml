@@ -6,13 +6,43 @@ spring:
     name: nimon-toy
   profiles:
     active: local
+  security:
+    enabled: false
+  jpa:
+    show_sql: true
+    format_sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+security:
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false
 
 ---
 spring:
   profiles: local
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/nimon_toy
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:mysql://localhost:5432/postgresql
+    username: postgresql
+    password: password
+  jpa:
+    databasePlatform: org.hibernate.dialect.MySQL8Dialect
+  properties:
+    hibernate:
+      temp:
+        useJdbcMetadataDefaults: false
 
 ---
 spring:
