@@ -32,17 +32,15 @@ management:
 ---
 spring:
   profiles: local
-  datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:mysql://localhost:5432/postgresql
-    username: postgresql
-    password: password
-  jpa:
-    databasePlatform: org.hibernate.dialect.MySQL8Dialect
-  properties:
-    hibernate:
-      temp:
-        useJdbcMetadataDefaults: false
+
+
+datasource:
+  url: jdbc:mysql://localhost/
+  db: nimontoy
+  options: ?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+  username: root
+  password: password
+
 
 ---
 spring:

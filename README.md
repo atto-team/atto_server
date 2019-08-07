@@ -30,3 +30,11 @@ gradlew test
 (macOs, Linux)
 ./gradlew test
 ```
+
+
+# 도커를 이용한 Mysql 로컬에 설치
+
+```bash
+docker pull mysql:8
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:8
+```
