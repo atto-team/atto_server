@@ -66,12 +66,15 @@ val springBootAdminVersion = "2.1.4"
 val swaggerVersion = "3.0.0-SNAPSHOT"
 val restDocsVersion = "2.0.3.RELEASE"
 val restAssuredVersion = "3.0.2"
+val mailVersion = "1.6.2"
 
 project("nimontoy-core") {
     dependencies {
         compile("mysql:mysql-connector-java")
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        
+        implementation("com.sun.mail:javax.mail:$mailVersion")
         implementation("com.klaytn.caver:core:$klaytnVersion")
     }
 
