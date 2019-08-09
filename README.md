@@ -38,3 +38,11 @@ gradlew test
 docker pull mysql:8
 docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:8
 ```
+
+# 환경변수 세팅
+
+```
+GMAIL_USERNAME 
+GMAIL_PASSWORD
+FIREBASE_SERVER_KEY
+``` 

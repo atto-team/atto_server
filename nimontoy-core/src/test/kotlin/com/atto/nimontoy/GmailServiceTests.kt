@@ -16,7 +16,10 @@ class GmailServiceTests {
 
     @Before
     fun setUp() {
-        gmailService = GmailService(GmailAuthentication())
+        gmailService = GmailService(GmailAuthentication(
+                System.getenv("GMAIL_USERNAME"),
+                System.getenv("GMAIL_PASSWORD")
+        ))
     }
 
     @Test

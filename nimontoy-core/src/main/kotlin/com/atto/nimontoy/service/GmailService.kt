@@ -1,7 +1,6 @@
 package com.atto.nimontoy.service
 
-import com.atto.nimontoy.service.GmailAccount.PASSWORD
-import com.atto.nimontoy.service.GmailAccount.USERNAME
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Service
@@ -17,19 +16,20 @@ import javax.mail.internet.MimeMessage
  * Blog : http://gyejoong.tistory.com
  * Github : http://github.com/Gyejoon
  */
-object GmailAccount {
-    const val USERNAME = "artoyworld"
-    const val PASSWORD = "atoworld0520"
-}
 
 @Configuration
-class GmailAuthentication : Authenticator() {
+class GmailAuthentication(
+        @Value("\${app.gmail.username}")
+        val username: String,
+        @Value("\${app.gmail.password}")
+        val password: String
+) : Authenticator() {
 
     @Bean
     fun passwordAuthentication() =
             PasswordAuthentication(
-                    USERNAME,
-                    PASSWORD
+                    username,
+                    password
             )
 
     override fun getPasswordAuthentication() = passwordAuthentication()
@@ -56,14 +56,17 @@ class GmailService(
         val session = Session.getDefaultInstance(properties, authentication)
         val msg = MimeMessage(session)
         val fromName = "NimonToy"
-        val from = InternetAddress(String(fromName.toByteArray(), Charsets.ISO_8859_1) + "<$USERNAME@gmail.com>")
+        val from = InternetAddress(String(fromName.toByteArray(), Charsets.ISO_8859_1) + "<${authentication.username}@gmail.com>")
         val to = InternetAddress(email)
 
-        msg.sentDate = Date()
-        msg.setFrom(from)
-        msg.setRecipient(Message.RecipientType.TO, to)
-        msg.subject = subject
-        msg.setText(text)
+
+        msg.apply {
+            sentDate = Date()
+            setFrom(from)
+            setRecipient(Message.RecipientType.TO, to)
+            setSubject(subject)
+            setText(text)
+        }
 
         try {
             Transport.send(msg)

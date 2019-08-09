@@ -21,6 +21,11 @@ logging:
             sql:
               BasicBinder: TRACE
 
+app:
+  gmail:
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+
 security:
   basic:
     enabled: false
