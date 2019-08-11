@@ -45,4 +45,6 @@ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:8
 GMAIL_USERNAME 
 GMAIL_PASSWORD
 FIREBASE_SERVER_KEY
+GOOGLE_APPLICATION_CREDENTIALS
+  - export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json"
 ``` 

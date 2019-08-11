@@ -1,8 +1,8 @@
 package com.atto.nimontoy
 
 import com.atto.nimontoy.util.loggerOf
+import com.google.firebase.auth.FirebaseAuth
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServletResponse
  * Blog : http://gyejoong.tistory.com
  * Github : http://github.com/Gyejoon
  */
-class AuthenticationFilter(
-        private val tokenProvider: JwtTokenProvider
-) : OncePerRequestFilter() {
+class AuthenticationFilter : OncePerRequestFilter() {
+
+    @Autowired
+    private lateinit var tokenProvider: JwtTokenProvider
 
     private val log = loggerOf(this::class.java)
 
@@ -26,7 +27,10 @@ class AuthenticationFilter(
 
             if (StringUtils.hasText(jwt)) {
 
+//                FirebaseAuth.getInstance().verifyIdToken(jwt)
+
                 //TODO. firebase or kakao token 검증 코드 구현
+                //TODO. 검증 후 redis에 토큰저장 로직 구현
 
 //                SecurityContextHolder.getContext().authentication = authentication
             }
