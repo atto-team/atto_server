@@ -1,4 +1,4 @@
-package com.atto.nimontoy
+package com.atto.nimontoy.config
 
 import org.springframework.context.annotation.Configuration
 
