@@ -67,13 +67,19 @@ val swaggerVersion = "3.0.0-SNAPSHOT"
 val restDocsVersion = "2.0.3.RELEASE"
 val restAssuredVersion = "3.0.2"
 val mailVersion = "1.6.2"
+val coroutinesCoreVersion = "1.3.0-RC2"
+
 
 project("nimontoy-core") {
     dependencies {
         compile("mysql:mysql-connector-java")
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
-        
+        compile("org.springframework.boot:spring-boot-starter-data-redis")
+
+        // coroutines core
+        compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
+
         implementation("com.sun.mail:javax.mail:$mailVersion")
         implementation("com.klaytn.caver:core:$klaytnVersion")
     }
@@ -111,10 +117,13 @@ project("nimontoy-api") {
     }
 }
 
+val firebaseAdminVersion = "6.8.1"
+
 project("nimontoy-security") {
     dependencies {
         implementation(project(":nimontoy-core"))
 
+        implementation("com.google.firebase:firebase-admin:$firebaseAdminVersion")
         implementation("org.springframework.boot:spring-boot-starter-security")
     }
 }
