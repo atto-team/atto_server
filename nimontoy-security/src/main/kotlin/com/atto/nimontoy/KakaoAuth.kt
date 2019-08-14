@@ -2,13 +2,13 @@ package com.atto.nimontoy
 
 import com.atto.nimontoy.util.loggerOf
 import org.codehaus.jackson.annotate.JsonProperty
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
+import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.HttpRequest
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 import org.springframework.http.client.ClientHttpRequestExecution
 import org.springframework.http.client.ClientHttpRequestInterceptor
+import java.time.Duration
 
 /**
  * Created by 00700mm@gmail.com on 2019-08-12
@@ -18,14 +18,14 @@ import org.springframework.http.client.ClientHttpRequestInterceptor
 
 @Component
 class KakaoAuth(
-        private val restTemplate: RestTemplate
+        private val restTemplateBuilder: RestTemplateBuilder
 ) {
     private val log = loggerOf(this::class)
-
-    companion object {
-        const val baseURL: String = "https://kapi.kakao.com"
-    }
-
+    private val restTemplate: RestTemplate = restTemplateBuilder
+            .rootUri("https://kapi.kakao.com")
+            .setConnectTimeout(Duration.ofSeconds(5))
+            .build()
+    
     fun getUserInfo(token: String): KakaoUserInfo {
         restTemplate.interceptors.add(ClientHttpRequestInterceptor { request: HttpRequest, body: ByteArray, execution: ClientHttpRequestExecution ->
             request.headers.apply {

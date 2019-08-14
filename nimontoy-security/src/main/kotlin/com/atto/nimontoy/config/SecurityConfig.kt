@@ -73,6 +73,7 @@ class SecurityConfig(
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
                 .antMatchers("/",
+                        "/v1/feeds/**",
                         "/favicon.ico",
                         "/**/*.png",
                         "/**/*.gif",
