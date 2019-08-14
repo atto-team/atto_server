@@ -1,9 +1,30 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
+buildscript {
+    extra["kotlinVersion"] = "1.3.30"
+    extra["springBootVersion"] = "2.1.7.RELEASE"
+
+    repositories {
+        maven("https://plugins.gradle.org/m2/")
+    }
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${extra["kotlinVersion"]}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${extra["kotlinVersion"]}") // kotlin-spring 사용을 위해 필요하다.
+        /**
+         * <a href="https://kotlinlang.org/docs/reference/compiler-plugins.html#no-arg-compiler-plugin">No-arg compiler plugin</a>
+         */
+        classpath("org.jetbrains.kotlin:kotlin-noarg:${extra["kotlinVersion"]}") // kotlin-jpa 사용을 위해 필요하다.
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${extra["springBootVersion"]}")
+    }
+}
+
 plugins {
     id("org.springframework.boot") version "2.1.6.RELEASE"
     id("io.spring.dependency-management") version "1.0.7.RELEASE"
     id("org.asciidoctor.convert") version "1.5.3"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.2.71"
+
     kotlin("jvm") version "1.2.71"
     kotlin("plugin.spring") version "1.2.71"
 }
@@ -19,6 +40,7 @@ allprojects {
 subprojects {
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-kapt")
+    apply(plugin = "kotlin-jpa")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")

@@ -13,12 +13,12 @@ import javax.persistence.*
 @Entity
 @Table(name = "users")
 data class User(
-        val name: String? = null,
+        val name: String,
         @ManyToMany
         @JoinTable(name = "user_roles",
                 joinColumns = [JoinColumn(name = "user_id")],
                 inverseJoinColumns = [JoinColumn(name = "role_id")])
-        val roles: Set<Role>? = null
+        val roles: MutableSet<Role> = mutableSetOf()
 ) : BaseEntity()
 
 @Entity
