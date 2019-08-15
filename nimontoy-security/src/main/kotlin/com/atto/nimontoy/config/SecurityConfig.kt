@@ -83,6 +83,16 @@ class SecurityConfig(
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
+                .antMatchers("/auth/login")
+                .permitAll()
+                .antMatchers(HttpMethod.GET,
+                        "/swagger-ui.html",
+                        "/webjars/springfox-swagger-ui/**",
+                        "/swagger-resources",
+                        "/swagger-resources/configuration/ui",
+                        "/swagger-resources/configuration/security",
+                        "/v2/api-docs")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
 

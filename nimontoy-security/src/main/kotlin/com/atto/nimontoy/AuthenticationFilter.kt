@@ -19,31 +19,35 @@ class AuthenticationFilter : OncePerRequestFilter() {
     @Autowired
     private lateinit var tokenProvider: JwtTokenProvider
 
+    @Autowired
+    private lateinit var firebaseAuth: FirebaseAuth
+
     private val log = loggerOf(this::class.java)
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        log.info("hello")
-//        try {
-//            val jwt = getJwtFromRequest(request)
-//
-//            if (StringUtils.hasText(jwt)) {
-//
-////                FirebaseAuth.getInstance().verifyIdToken(jwt)
-//
-//                //TODO. firebase or kakao token 검증 코드 구현
-//                //TODO. 검증 후 redis에 토큰저장 로직 구현
-//
-////                SecurityContextHolder.getContext().authentication = authentication
-//            }
-//
-//        } catch (e: Exception) {
-//            log.error("Could not set user authentication in security context", e)
-//            throw UnauthorizedException()
-//        }
+        try {
+            val jwt = getJwtFromRequest(request)
+
+            if (StringUtils.hasText(jwt)) {
+
+                log.info(jwt)
+
+                val user = firebaseAuth.verifyIdToken(jwt)
+
+                log.info("{}", user)
+
+                //TODO. firebase or kakao token 검증 코드 구현
+                //TODO. 검증 후 redis에 토큰저장 로직 구현
+
+//                SecurityContextHolder.getContext().authentication = authentication
+            }
+
+        } catch (e: Exception) {
+            log.error("Could not set user authentication in security context", e)
+            throw UnauthorizedException()
+        }
 
         filterChain.doFilter(request, response)
-
-        log.info("what?")
     }
 
     private fun getJwtFromRequest(request: HttpServletRequest): String {
