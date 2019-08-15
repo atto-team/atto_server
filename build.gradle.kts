@@ -38,6 +38,16 @@ allprojects {
 }
 
 subprojects {
+    extra["klaytnVersion"] = "1.0.0"
+    extra["springBootAdminVersion"] = "2.1.4"
+    extra["swaggerVersion"] = "3.0.0-SNAPSHOT"
+    extra["restDocsVersion"] = "2.0.3.RELEASE"
+    extra["restAssuredVersion"] = "3.0.2"
+    extra["mailVersion"] = "1.6.2"
+    extra["coroutinesCoreVersion"] = "1.3.0-RC2"
+    extra["firebaseAdminVersion"] = "6.8.1"
+    extra["swaggerVersion"] = "2.9.2"
+
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-kapt")
     apply(plugin = "kotlin-jpa")
@@ -83,15 +93,6 @@ subprojects {
     }
 }
 
-val klaytnVersion = "1.0.0"
-val springBootAdminVersion = "2.1.4"
-val swaggerVersion = "3.0.0-SNAPSHOT"
-val restDocsVersion = "2.0.3.RELEASE"
-val restAssuredVersion = "3.0.2"
-val mailVersion = "1.6.2"
-val coroutinesCoreVersion = "1.3.0-RC2"
-
-
 project("nimontoy-core") {
     dependencies {
         compile("mysql:mysql-connector-java")
@@ -100,10 +101,12 @@ project("nimontoy-core") {
         compile("org.springframework.boot:spring-boot-starter-data-redis")
 
         // coroutines core
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
+        compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:${extra["coroutinesCoreVersion"]}")
 
-        implementation("com.sun.mail:javax.mail:$mailVersion")
-        implementation("com.klaytn.caver:core:$klaytnVersion")
+        implementation("com.sun.mail:javax.mail:${extra["mailVersion"]}")
+        implementation("com.klaytn.caver:core:${extra["klaytnVersion"]}")
+        implementation("io.springfox:springfox-swagger2:${extra["swaggerVersion"]}")
+        implementation("io.springfox:springfox-swagger-ui:${extra["swaggerVersion"]}")
     }
 
     val jar: Jar by tasks
@@ -117,7 +120,7 @@ project("nimontoy-admin") {
     dependencies {
         implementation(project(":nimontoy-core"))
 
-        implementation("de.codecentric:spring-boot-admin-starter-server:$springBootAdminVersion")
+        implementation("de.codecentric:spring-boot-admin-starter-server:${extra["springBootAdminVersion"]}")
     }
 }
 
@@ -126,26 +129,24 @@ project("nimontoy-api") {
         implementation(project(":nimontoy-core"))
         implementation(project(":nimontoy-security"))
 
-        implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
+        implementation("de.codecentric:spring-boot-admin-starter-client:${extra["springBootAdminVersion"]}")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-        asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:$restDocsVersion")
+        asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:${extra["restDocsVersion"]}")
 
-        testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc:$restDocsVersion")
-        testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
+        testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc:${extra["restDocsVersion"]}")
+        testImplementation("io.rest-assured:rest-assured:${extra["restAssuredVersion"]}")
         testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
 
         implementation("org.springframework.boot:spring-boot-devtools")
     }
 }
 
-val firebaseAdminVersion = "6.8.1"
-
 project("nimontoy-security") {
     dependencies {
         implementation(project(":nimontoy-core"))
 
-        implementation("com.google.firebase:firebase-admin:$firebaseAdminVersion")
+        implementation("com.google.firebase:firebase-admin:${extra["firebaseAdminVersion"]}")
         implementation("org.springframework.boot:spring-boot-starter-security")
     }
 }
