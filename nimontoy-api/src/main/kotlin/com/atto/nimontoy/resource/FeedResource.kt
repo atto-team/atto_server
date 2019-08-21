@@ -36,16 +36,15 @@ class FeedResource(
                         ApiResponse(
                                 data = BaseResponse(
                                         id = id,
-                                        type = Type.FEED_DETAIL,
+                                        type = Type.FEED_LIST,
                                         scheme = UriComponentsBuilder
                                                 .fromUriString("/v1/feeds/{id}")
                                                 .buildAndExpand(id)
                                                 .toUriString(),
-                                        attributes = it
+                                        attributes = FeedResponse.of(it)
                                 )
                         )
                     }
-
 
     @PostMapping
     fun createFeed(

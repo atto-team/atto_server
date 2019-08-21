@@ -11,7 +11,7 @@ open class ApiResponse(
 
 open class BaseResponse(
         val id: Long,
-        val type: String,
+        val type: Type,
         val scheme: String,
         val attributes: Any
 )

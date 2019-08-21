@@ -1,6 +1,11 @@
 package com.atto.nimontoy.api
 
-object Type {
-    const val FEED_LIST = "feed.list"
-    const val FEED_DETAIL = "feed.detail"
+import com.fasterxml.jackson.annotation.JsonValue
+
+enum class Type(
+        @get:JsonValue
+        val title: String
+) {
+    FEED_LIST("feed.list"),
+    FEED_DETAIL("feed.detail")
 }
