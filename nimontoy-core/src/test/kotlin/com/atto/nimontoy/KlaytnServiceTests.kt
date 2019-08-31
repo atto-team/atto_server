@@ -16,16 +16,19 @@ class KlaytnServiceTests {
 
     @Test
     fun credentials() {
-        val credentials = klayService.getCredentials("test", "pass")
+        val kly = klayService
+        val credentials = kly.getCredentials("test", "pass")
         println(credentials.address)
-//        println(klayService.getPublicKeyToHexString(credentials))
+        println(klayService.getPublicKeyToHexString(credentials))
+
     }
 
     @Test
     fun makeTx() {
+        val value = "1000000000000000000000000000"
         val credentials = klayService.getCredentials("test", "pass")
-        val receipt = klayService.makeTransactionToBAOBAB(credentials, credentials.address)
-
+        val tx = klayService.makeSignedTransactionToCypress(credentials, credentials.address, value)
+        println(tx.signatureData)
     }
 
 }
