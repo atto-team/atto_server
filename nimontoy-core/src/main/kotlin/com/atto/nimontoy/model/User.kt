@@ -14,11 +14,17 @@ import javax.persistence.*
 @Table(name = "users")
 data class User(
         val name: String,
+        val email: String,
         @ManyToMany
         @JoinTable(name = "user_roles",
                 joinColumns = [JoinColumn(name = "user_id")],
                 inverseJoinColumns = [JoinColumn(name = "role_id")])
-        val roles: MutableSet<Role> = mutableSetOf()
+        val roles: MutableSet<Role> = mutableSetOf(),
+        @ManyToMany
+        @JoinTable(name = "follow_relations",
+                joinColumns = [JoinColumn(name = "followed_id")],
+                inverseJoinColumns = [JoinColumn(name = "follower_id")])
+        val follow: MutableSet<User> = mutableSetOf()
 ) : BaseEntity()
 
 @Entity

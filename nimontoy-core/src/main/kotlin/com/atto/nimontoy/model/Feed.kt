@@ -10,6 +10,7 @@ import javax.persistence.*
  * Github : http://github.com/Gyejoon
  */
 @Entity
+@Table(name = "feeds")
 data class Feed(
         val title: String,
         val contents: String,
@@ -34,6 +35,7 @@ data class Feed(
 }
 
 @Entity
+@Table(name = "feed_comments")
 data class FeedComment(
         @ManyToOne
         var feed: Feed,
