@@ -1,4 +1,4 @@
-package com.atto.nimontoy.resource
+package com.atto.nimontoy.controller
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -10,4 +10,4 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/v1/users")
-class UserResource
+class UserController

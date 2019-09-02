@@ -1,4 +1,4 @@
-package com.atto.nimontoy.resource
+package com.atto.nimontoy.controller
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController
  * Github : http://github.com/Gyejoon
  */
 @RestController
-@RequestMapping("/v1/toys")
-class ToyResource
+@RequestMapping("/v1/collections")
+class CollectionController

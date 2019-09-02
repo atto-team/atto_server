@@ -1,4 +1,4 @@
-package com.atto.nimontoy.resource
+package com.atto.nimontoy.controller
 
 import com.atto.nimontoy.api.ApiResponse
 import com.atto.nimontoy.api.BaseResponse
@@ -20,7 +20,7 @@ import javax.validation.Valid
  */
 @RestController
 @RequestMapping("/v1/feeds")
-class FeedResource(
+class FeedController(
         private val feedRepository: FeedRepository,
         private val feedCommentRepository: FeedCommentRepository
 ) {
