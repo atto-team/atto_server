@@ -20,13 +20,15 @@ buildscript {
 }
 
 plugins {
+    idea
     id("org.springframework.boot") version "2.1.6.RELEASE"
     id("io.spring.dependency-management") version "1.0.7.RELEASE"
     id("org.asciidoctor.convert") version "1.5.3"
-    id("org.jetbrains.kotlin.plugin.jpa") version "1.2.71"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.3.21"
 
-    kotlin("jvm") version "1.2.71"
-    kotlin("plugin.spring") version "1.2.71"
+    kotlin("jvm") version "1.3.21"
+    kotlin("kapt") version "1.3.21"
+    kotlin("plugin.spring") version "1.3.21"
 }
 
 allprojects {
@@ -47,14 +49,18 @@ subprojects {
     extra["coroutinesCoreVersion"] = "1.3.0-RC2"
     extra["firebaseAdminVersion"] = "6.8.1"
     extra["swaggerVersion"] = "2.9.2"
+    extra["querydslVersion"] = "4.2.1"
 
-    apply(plugin = "kotlin")
-    apply(plugin = "kotlin-kapt")
-    apply(plugin = "kotlin-jpa")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "org.asciidoctor.convert")
+    apply {
+        plugin("idea")
+        plugin("kotlin")
+        plugin("kotlin-kapt")
+        plugin("kotlin-jpa")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+        plugin("org.jetbrains.kotlin.plugin.spring")
+        plugin("org.asciidoctor.convert")
+    }
 
     group = "com.atto.nimontoy"
     version = "1.0.0"
@@ -93,15 +99,33 @@ subprojects {
 }
 
 project("nimontoy-core") {
+    idea {
+        module {
+            val kaptMain = file("build/generated/source/kapt/main")
+            sourceDirs.add(kaptMain)
+            generatedSourceDirs.add(kaptMain)
+        }
+    }
+
+    sourceSets {
+        val main by getting
+        main.java.srcDirs.add(file("$buildDir/generated/source/kapt/main"))
+    }
+
     dependencies {
         compile("mysql:mysql-connector-java")
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         compile("org.springframework.boot:spring-boot-starter-data-redis")
 
+        compile("com.querydsl:querydsl-jpa")
+        kapt("com.querydsl:querydsl-apt:${extra["querydslVersion"]}:jpa")
+        kapt("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final")
+
         // coroutines core
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:${extra["coroutinesCoreVersion"]}")
 
+        implementation("com.google.guava:guava:18.0")
         implementation("com.sun.mail:javax.mail:${extra["mailVersion"]}")
         implementation("com.klaytn.caver:core:${extra["klaytnVersion"]}")
         implementation("io.springfox:springfox-swagger2:${extra["swaggerVersion"]}")

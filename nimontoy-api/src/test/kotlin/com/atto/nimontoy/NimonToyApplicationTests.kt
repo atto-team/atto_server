@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner
  * Blog : http://gyejoong.tistory.com
  * Github : http://github.com/Gyejoon
  */
-@RunWith(SpringRunner::class)
-@SpringBootTest
+//@RunWith(SpringRunner::class)
+//@SpringBootTest
 class NimonToyApplicationTests {
 
     @Test
