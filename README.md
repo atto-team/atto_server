@@ -48,3 +48,9 @@ FIREBASE_SERVER_KEY
 GOOGLE_APPLICATION_CREDENTIALS
   - export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json"
 ``` 
+
+# Build & QueryDSL Generate
+
+```
+gradlew :nimontoy-api:build
+```
