@@ -6,6 +6,6 @@ enum class Type(
         @get:JsonValue
         val title: String
 ) {
-    FEED_LIST("feed.list"),
-    FEED_DETAIL("feed.detail")
+    FEED_CELL("feed.cell"),
+    FEED_COMMENT_CELL("feed.comment.cell")
 }

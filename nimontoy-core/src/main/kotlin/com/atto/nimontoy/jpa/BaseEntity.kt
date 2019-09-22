@@ -26,8 +26,8 @@ abstract class BaseEntity : Serializable {
     val id: Long = 0
 
     @CreatedDate
-    private var createdDate: LocalDateTime? = now()
+    var createdDate: LocalDateTime = now()
 
     @LastModifiedDate
-    private var lastModifiedDate: LocalDateTime? = now()
+    var lastModifiedDate: LocalDateTime = now()
 }

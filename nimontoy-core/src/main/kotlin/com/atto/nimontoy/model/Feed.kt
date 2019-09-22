@@ -14,7 +14,7 @@ import javax.persistence.*
 data class Feed(
         val title: String,
         val contents: String,
-        @OneToMany(mappedBy = "feed")
+        @OneToMany(mappedBy = "feed", cascade = [CascadeType.ALL])
         val comments: MutableList<FeedComment> = mutableListOf(),
         @ManyToMany
         @JoinTable(name = "feed_likes",
@@ -23,9 +23,10 @@ data class Feed(
         val likes: MutableSet<User> = mutableSetOf()
 ) : BaseEntity() {
 
-    fun addComment(comment: FeedComment) {
+    fun addComment(comment: FeedComment): Feed {
         comment.feed = this
         comments.add(comment)
+        return this
     }
 
     fun like(user: User) {
@@ -37,10 +38,11 @@ data class Feed(
 @Entity
 @Table(name = "feed_comments")
 data class FeedComment(
-        @ManyToOne
-        var feed: Feed,
         val contents: String
-) : BaseEntity()
+) : BaseEntity() {
+    @ManyToOne
+    lateinit var feed: Feed
+}
 
 interface FeedRepository : JpaRepository<Feed, Long>
 
