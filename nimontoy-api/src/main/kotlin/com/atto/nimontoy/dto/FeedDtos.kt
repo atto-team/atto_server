@@ -2,7 +2,7 @@ package com.atto.nimontoy.dto
 
 import com.atto.nimontoy.api.BaseResponse
 import com.atto.nimontoy.api.Type
-import com.atto.nimontoy.api.dto.BaseRequest
+import com.atto.nimontoy.api.BaseRequest
 import com.atto.nimontoy.model.Feed
 import com.atto.nimontoy.model.FeedComment
 import com.fasterxml.jackson.annotation.JsonFormat

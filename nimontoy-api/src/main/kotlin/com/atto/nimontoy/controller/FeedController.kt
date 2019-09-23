@@ -3,9 +3,11 @@ package com.atto.nimontoy.controller
 import com.atto.nimontoy.api.ok
 import com.atto.nimontoy.dto.FeedCommentCreateRequest
 import com.atto.nimontoy.dto.FeedCreateRequest
+import com.atto.nimontoy.dto.FeedResponse
 import com.atto.nimontoy.jpa.PageRequest
 import com.atto.nimontoy.service.feed.FeedQueryService
 import com.atto.nimontoy.service.feed.FeedService
+import io.swagger.annotations.ApiResponse
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 

@@ -128,7 +128,7 @@ project("nimontoy-core") {
         implementation("com.google.guava:guava:18.0")
         implementation("com.sun.mail:javax.mail:${extra["mailVersion"]}")
         implementation("com.klaytn.caver:core:${extra["klaytnVersion"]}")
-        implementation("io.springfox:springfox-swagger2:${extra["swaggerVersion"]}")
+        compile("io.springfox:springfox-swagger2:${extra["swaggerVersion"]}")
         implementation("io.springfox:springfox-swagger-ui:${extra["swaggerVersion"]}")
     }
 
